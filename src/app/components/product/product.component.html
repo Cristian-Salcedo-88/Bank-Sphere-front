@@ -1,0 +1,188 @@
+<div class="producto-container">
+    <!-- Nombre de la persona registrada -->
+    <div class="header">
+      <h2>Bienvenido</h2>
+    </div>
+    <div >  
+    <button (click)="openModal()">Simular Interes</button>    
+    </div>  
+    <div class="productos">
+        <div class="producto-card">
+          <h3>Cuenta Corriente</h3>
+          <p *ngIf="checkingAccount">Saldo: {{ checkingAccount.balance | currency }}</p>
+          <button *ngIf="!checkingAccount" (click)="openModalCdt('CORRIENTE')">Agregar Producto</button>
+          <button *ngIf="checkingAccount" (click)="openModalOpe('RETIRO', 'CORRIENTE')">Retiro</button>
+          <button *ngIf="checkingAccount" (click)="openModalOpe('DEPOSITO', 'CORRIENTE')">Deposito</button>
+          <button *ngIf="checkingAccount" (click)="openModalCancel('CANCELACION', 'CORRIENTE')">Cancelar Cuenta</button>
+        </div>
+    
+        <div class="producto-card">
+          <h3>Cuenta de Ahorros</h3>
+          <p *ngIf="savingAccount">Saldo: {{ savingAccount.balance | currency }}</p>
+          <button *ngIf="!savingAccount" (click)="openModalCdt('AHORROS')">Agregar Producto</button>
+          <button *ngIf="savingAccount" (click)="openModalOpe('RETIRO','AHORROS')">Retiro</button>
+          <button *ngIf="savingAccount" (click)="openModalOpe('DEPOSITO', 'AHORROS')">Deposito</button>
+          <button *ngIf="savingAccount" (click)="openModalCancel('CANCELACION', 'AHORROS')">Cancelar Cuenta</button>
+        </div>
+    
+        <div class="producto-card">
+          <h3>CDT</h3>
+          <p *ngIf="cdt">Saldo: {{ cdt.balance| currency }}</p>
+          <button *ngIf="!cdt" (click)="openModalCdt('CDT')">Agregar Producto</button>
+          <button *ngIf="cdt" (click)="openModalCancel('CANCELACION','CDT')">Cancelar Cuenta</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal" *ngIf="mostrarModal" id="simulacionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Simulación de Intereses</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="simulacionForm" (ngSubmit)="simularInteres()">
+                <div class="mb-3">
+                  <label for="tipoCuenta" class="form-label">Tipo de Cuenta</label>
+                  <select id="tipoCuenta" class="form-select" formControlName="tipoCuenta" required>
+                    <option value="ahorros">Cuenta de Ahorros</option>
+                    <option value="cdt">CDT</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="valorInicial" class="form-label">Valor a Simular</label>
+                  <input type="number" id="valorInicial" class="form-control" formControlName="valorInicial" required />
+                </div>
+                <div class="mb-3">
+                  <label for="meses" class="form-label">Cantidad de Meses</label>
+                  <input type="number" id="meses" class="form-control" formControlName="meses" required />
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Simular</button>
+                <button (click)="closeModal()" class="btn btn-primary w-100">Cerrar</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <p *ngIf="resultadoSimulacion">Resultado: {{ resultadoSimulacion | currency }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modalCdt" *ngIf="mostrarModalCdt" id="depositModal">
+        <div class="modalCdt-dialog">
+          <div class="modalCdt-content">
+            <!-- Header -->
+            <div class="modalCdt-header">
+              <h5 class="modalCdt-title">Ingresar Valor</h5>
+              <button class="btnCdt-close" (click)="closeModalCdt()">&times;</button>
+            </div>
+      
+            <!-- Body -->
+            <div class="modalCdt-body">
+              <form id="depositForm" [formGroup]="productForm"  (ngSubmit)="agregarProducto()">
+                <div class="formCdt-group">
+                  <label for="depositValue">Valor a ingresar</label>
+                  <input 
+                    type="number" 
+                    id="depositValue" 
+                    class="formCdt-control" 
+                    placeholder="Ingrese el valor" 
+                    formControlName = "saldoInicial"
+                    required
+                  />
+                </div>
+                <div class="infoCdt-note" *ngIf="accountType === 'CDT'">
+                  <p>
+                    <strong>Nota:</strong>
+                    <br />De un peso a $500,000: <strong>1.0%</strong> mensual.
+                    <br />De $500,001 a $1,000,000: <strong>1.6%</strong> mensual.
+                    <br />Más de $1,000,000: <strong>2.0%</strong> mensual.
+                  </p>
+                </div> 
+                <div class="modalCdt-footer">
+                </div>
+                <button 
+                      type="submit" 
+                      class="btnCdt btnCdt-primary" 
+                      [disabled]="productForm.invalid"
+                    >
+                      Confirmar
+                    </button>
+                  <button 
+                    type="button" 
+                    class="btnCdt btnCdt-secondary" 
+                    (click)="closeModalCdt()"
+                  >
+                    Cancelar
+                  </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modalCdt" *ngIf="mostrarModalOpe" id="depositModal">
+        <div class="modalCdt-dialog">
+          <div class="modalCdt-content">
+            <!-- Header -->
+            <div class="modalCdt-header">
+              <h5 class="modalCdt-title">Ingresar Valor</h5>
+              <button class="btnCdt-close" (click)="closeModalOpe()">&times;</button>
+            </div>
+      
+            <!-- Body -->
+            <div class="modalCdt-body">
+              <form id="depositForm" [formGroup]="transactionForm"  (ngSubmit)="makeTransaction()">
+                <div class="formCdt-group">
+                  <label for="depositValue">Valor a ingresar</label>
+                  <input 
+                    type="number" 
+                    id="depositValue" 
+                    class="formCdt-control" 
+                    placeholder="Ingrese el valor" 
+                    formControlName = "saldo"
+                    required
+                  />
+                </div>
+                <button 
+                      type="submit" 
+                      class="btnCdt btnCdt-primary" 
+                      [disabled]="productForm.invalid"
+                    >
+                      Confirmar
+                    </button>
+                  <button 
+                    type="button" 
+                    class="btnCdt btnCdt-secondary" 
+                    (click)="closeModalOpe()"
+                  >
+                    Cancelar
+                  </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modalCancel" *ngIf="mostrarModalCancel">
+        <div class="modalCancel-dialog">
+          <div class="modalCancel-content">
+            <div class="modalCancel-header">
+              <h5 class="modalCancel-title">Confirmación</h5>
+              <button class="btnCancel-close" (click)="closeModalCancel()">&times;</button>
+            </div>
+            <div class="modalCancel-body">
+              <p>¿Está seguro de que desea cancelar su cuenta?</p>
+            </div>
+            <div class="modalCancel-footer">
+              <button class="btnCancel btnCancel-danger" (click)="confirmarCancelacion()">Sí, Cancelar</button>
+              <button class="btnCancel btnCancel-secondary" (click)="closeModalCancel()">No, Volver</button>
+            </div>
+          </div>
+        </div>
+      </div>

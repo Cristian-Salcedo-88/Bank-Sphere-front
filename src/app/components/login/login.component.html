@@ -1,0 +1,24 @@
+<div class="login-container">
+    <div class="login-form">
+      <h2>Iniciar Sesión</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="cedula">Cédula</label>
+          <input
+            id="cedula"
+            type="text"
+            class="form-control"
+            formControlName="cedula"
+            placeholder="Ingrese su cédula"
+          />
+          <div class="error" *ngIf="loginForm.get('cedula')?.invalid && loginForm.get('cedula')?.touched">
+            La cédula es obligatoria.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+          Ingresar
+        </button>
+      </form>
+      <p>¿No tienes cuenta? <a (click)="switchToRegister()">Regístrate aquí</a></p>
+    </div>
+  </div>

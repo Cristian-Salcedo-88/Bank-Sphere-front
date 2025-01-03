@@ -1,0 +1,110 @@
+<!-- register.component.html -->
+<div class="auth-container">
+    <h2>Registrarse</h2>
+  
+    <!-- Formulario de Registro -->
+    <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+      <!-- Campo de Cédula -->
+      <div class="form-group">
+        <label for="identificationNumber">Cédula:</label>
+        <input 
+          id="cedula" 
+          type="text" 
+          formControlName="identificationNumber" 
+          placeholder="Ingresa tu cédula"
+          class="form-control"
+        />
+        <div *ngIf="registerForm.get('identificationNumber')?.invalid && registerForm.get('identificationNumber')?.touched" class="error">
+          <small *ngIf="registerForm.get('identificationNumber')?.errors?.['required']">La cédula es obligatoria.</small>
+          <small *ngIf="registerForm.get('identificationNumber')?.errors?.['pattern']">La cédula debe ser numérica.</small>
+        </div>
+      </div>
+  
+      <!-- Campo de Nombre -->
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input 
+          id="nombre" 
+          type="text" 
+          formControlName="name" 
+          placeholder="Ingresa tu Nombre"
+          class="form-control"
+        />
+        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="error">
+          <small *ngIf="registerForm.get('name')?.errors?.['required']">El nombre es obligatorio.</small>
+        </div>
+      </div>
+  
+      <!-- Campo de Teléfono -->
+      <div class="form-group">
+        <label for="phone">Teléfono:</label>
+        <input 
+          id="telefono" 
+          type="text" 
+          formControlName="phone" 
+          placeholder="Ingresa tu teléfono"
+          class="form-control"
+        />
+        <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched" class="error">
+          <small *ngIf="registerForm.get('phone')?.errors?.['required']">El teléfono es obligatorio.</small>
+          <small *ngIf="registerForm.get('telefono')?.errors?.['pattern']">El teléfono no es válido.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="personType">Tipo de Cliente</label>
+        <select formControlName="personType" (change)="onTipoClienteChange($event)">
+          <option value="NATURAL">Natural</option>
+          <option value="JURIDICO">Jurídico</option>
+        </select>
+      </div>
+
+       <!-- Información adicional para tipo Jurídico -->
+    <div *ngIf="isJuridico" class="juridico-fields">
+        <div class="form-group">
+          <label for="delegateName">Nombre del Representante Legal</label>
+          <input
+            type="text"
+            id="delegateName"
+            formControlName="delegateName"
+            placeholder="Ingrese nombre del representante legal"
+          />
+          <div *ngIf="registerForm.get('delegateName')?.invalid && registerForm.get('delegateName')?.touched" class="error-message">
+            Nombre del representante es obligatorio.
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="delegateIdentification">Cédula del Representante</label>
+          <input
+            type="number"
+            id="delegateIdentification"
+            formControlName="delegateIdentification"
+            placeholder="Ingrese cédula del representante"
+          />
+          <div *ngIf="registerForm.get('delegateIdentification')?.invalid && registerForm.get('delegateIdentification')?.touched" class="error-message">
+            Cédula del representante es obligatoria.
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="delegatePhone">Teléfono del Representante</label>
+          <input
+            type="tel"
+            id="delegatePhone"
+            formControlName="delegatePhone"
+            placeholder="Ingrese teléfono del representante"
+          />
+          <div *ngIf="registerForm.get('delegatePhone')?.invalid && registerForm.get('delegatePhone')?.touched" class="error-message">
+            Teléfono del representante es obligatorio.
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de Enviar -->
+      <div class="button-group">
+        <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Registrarse</button>
+      </div>
+    </form>
+  </div>
+  

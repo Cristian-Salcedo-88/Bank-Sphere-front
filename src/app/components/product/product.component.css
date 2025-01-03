@@ -1,0 +1,342 @@
+/* Contenedor principal */
+.producto-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  /* Encabezado */
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h2 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Botón de simulación */
+  button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+    color: #fff;
+  }
+  
+  /* Estilo de las tarjetas de productos */
+  .productos {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .producto-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .producto-card h3 {
+    font-size: 20px;
+    color: #0056b3;
+  }
+  
+  .producto-card p {
+    margin: 15px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .producto-card button {
+    background-color: #007bff;
+    color: #fff;
+    margin: 5px 0;
+  }
+  
+  .producto-card button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Modal General */
+  .modal, .modalCdt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+  }
+  
+  .modal-dialog, .modalCdt-dialog {
+    background: white;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Contenido del modal */
+  .modal-content, .modalCdt-content {
+    padding: 20px;
+  }
+  
+  /* Header del modal */
+  .modal-header, .modalCdt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .modal-header h5, .modalCdt-header h5 {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .btn-close, .btnCdt-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* Cuerpo del modal */
+  .modal-body, .modalCdt-body {
+    padding: 20px 0;
+  }
+  
+  .modal-body label, .modalCdt-body label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .modal-body input, .modalCdt-body input, 
+  .modal-body select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .modal-body input:focus, 
+  .modalCdt-body input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .infoCdt-note p {
+    background: #f9f9f9;
+    border-left: 4px solid #007bff;
+    padding: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* Footer del modal */
+  .modal-footer, .modalCdt-footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  
+  .modal-footer p, .modalCdt-footer p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .btn, .btnCdt {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .btn-primary, .btnCdt-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover, .btnCdt-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-secondary, .btnCdt-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-secondary:hover, .btnCdt-secondary:hover {
+    background-color: #5a6268;
+  }
+  .modalproduct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1050;
+  }
+  
+  .modalproduct-dialog {
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+  }
+  
+  .modalproduct-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btnproduct-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .w-100 {
+    width: 100%;
+  }
+  
+  .btnproduct-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btnproduct-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .modalCancel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+  }
+  
+  .modalCancel-dialog {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: fadeInCancel 0.3s ease-out;
+  }
+  
+  .modalCancel-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .modalCancel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 15px;
+  }
+  
+  .modalCancel-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .btnCancel-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+  }
+  
+  .modalCancel-body {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .modalCancel-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .btnCancel {
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+  }
+  
+  .btnCancel-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .btnCancel-danger:hover {
+    background-color: #c82333;
+  }
+  
+  .btnCancel-secondary {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .btnCancel-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  @keyframes fadeInCancel {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  

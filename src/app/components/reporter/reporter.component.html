@@ -1,0 +1,51 @@
+<div class="report-container">
+    <!-- Título principal -->
+    <h2>Generación de Informes</h2>
+  
+    <!-- Opciones de informe -->
+    <div class="report-options">
+      <button (click)="ShowAverageBalanceByType()">Saldo Promedio por Tipo de Cuenta</button>
+      <button (click)="ShowClientsHighestBalance()">Top 10 Clientes con Mayor Saldo</button>
+    </div>
+  
+    <!-- Tabla: Saldo Promedio por Tipo de Cuenta -->
+    <div *ngIf="informeSeleccionado === 'saldoPromedio'" class="table-container">
+      <h3>Saldo Promedio por Tipo de Cuenta</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo de Cuenta</th>
+            <th>Saldo Promedio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cuenta of saldoPromedioData">
+            <td>{{ cuenta.accountType }}</td>
+            <td>{{ cuenta.averageBalance| currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Tabla: Top 10 Clientes con Mayor Saldo -->
+    <div *ngIf="informeSeleccionado === 'clientesTop'" class="table-container">
+      <h3>Top 10 Clientes con Mayor Saldo</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Tipo de Cuenta</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientesData">
+            <td>{{ cliente.name }}</td>
+            <td>{{ cliente.accountType }}</td>
+            <td>{{ cliente.balance | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

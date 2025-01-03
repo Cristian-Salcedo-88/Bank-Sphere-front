@@ -1,59 +1,38 @@
-# BankSphere
+# Bank Sphere Web UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+Este proyecto es una aplicación web básica desarrollada en Angular. Incluye instrucciones para configurarlo y ejecutarlo en tu entorno local o en otro equipo.
 
-## Development server
+## Requisitos previos
 
-To start a local development server, run:
+Asegúrate de cumplir con los siguientes requisitos antes de ejecutar el proyecto:
 
-```bash
-ng serve
-```
+1. **Herramientas necesarias:**
+  - Angular CLI: 19.0.2
+  - Node: 22.11.0
+  - Package Manager: npm 10.9.0
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+2. **Clonar el repositorio:**
+   ```bash
+   git@github.com:Cristian-Salcedo-88/Bank-Sphere-front.git
+   cd Bank-Sphere-front
+   ```
 
-## Code scaffolding
+## Instalación del proyecto
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. **Instalar dependencias:**
+   - Ejecuta el siguiente comando en el directorio del proyecto para instalar todas las dependencias necesarias:
+     ```bash
+     npm install
+     ```
 
-```bash
-ng generate component component-name
-```
+## Ejecutar el proyecto en desarrollo
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. **Iniciar el servidor de desarrollo:**
+   - Usa Angular CLI para iniciar el servidor de desarrollo:
+     ```bash
+     ng serve
+     ```
+   - Por defecto, el proyecto estará disponible en `http://localhost:4200/`.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+2. **Acceder a la aplicación:**
+   - Abre tu navegador e ingresa a `http://localhost:4200/`.

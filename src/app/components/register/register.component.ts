@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.registerService.register(this.registerForm.value).subscribe({
         next: () => this.router.navigate(["/login"]),
-        error: response => { debugger
+        error: response => {
         Swal.fire("Error","El cliente ya se encuentra registrado","error")
       }
       })

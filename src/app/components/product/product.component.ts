@@ -198,4 +198,8 @@ export class ProductComponent implements OnInit {
     await this.makeTransaction();
     this.closeModalCancel();
   }
+
+  cerrarSesion(){
+    this.router.navigate(["/login"])
+  }
 }

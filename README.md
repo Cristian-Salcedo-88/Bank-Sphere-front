@@ -36,3 +36,7 @@ Asegúrate de cumplir con los siguientes requisitos antes de ejecutar el proyect
 
 2. **Acceder a la aplicación:**
    - Abre tu navegador e ingresa a `http://localhost:4200/`.
+  
+  ##Vista de reportes
+1. **Para acceder al apartado de reportes se adjunta el siguiente link con el cual podras acceder a los reportes**
+  - en tu navegador ingresa a `http://localhost:4200/reporter`.

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { CreateProductData, ProductRegister, ProductResponse, UpdateProduct } from '../../interface/product.interface';
 import Swal from 'sweetalert2';
@@ -32,7 +32,12 @@ export class ProductComponent implements OnInit {
   operationType: 'DEPOSITO' | 'RETIRO' | 'CANCELACION' | '' = ''; 
 
 
-  constructor(private fb: FormBuilder, private productService: ProductService, private activateRoute: ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private activateRoute: ActivatedRoute,
+    private router: Router
+  ) {
     this.simulacionForm = this.fb.group({
       tipoCuenta: ['', Validators.required],
       valorInicial: [0, [Validators.required, Validators.min(1)]],
@@ -51,17 +56,20 @@ export class ProductComponent implements OnInit {
     .pipe(switchMap(({id}) =>{
       this.clientId = id
       return this.productService.getProduct(id)
-    })).subscribe(productsResponse => {
-      productsResponse.map(product => {
-        if (product.accountType === "AHORROS") {
-          this.savingAccount = product
-        } else if (product.accountType === "CORRIENTE") {
-          this.checkingAccount = product
-        }else{
-          this.cdt = product
-        }
-      })
-    })
+    })).subscribe({
+      next: productsResponse => {
+        productsResponse.map(product => {
+          if (product.accountType === "AHORROS") {
+            this.savingAccount = product
+          } else if (product.accountType === "CORRIENTE") {
+            this.checkingAccount = product
+          }else{
+            this.cdt = product
+          }
+        })
+    },
+    error: () => this.router.navigate(['/not-found'])
+  })
   
   }
   

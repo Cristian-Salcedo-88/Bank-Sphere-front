@@ -8,7 +8,9 @@ export const routes: Routes = [
   { path: 'login', loadChildren: ()=> import("./components/login/login.module").then(m => m.LoginModule )},
   { path: 'register', loadChildren: ()=> import("./components/register/register.module").then(m => m.RegisterModule )},
   { path: 'reporter', loadChildren: ()=> import("./components/reporter/reporter.module").then(m => m.ReporterModule )},
-  { path: 'product/:id', loadChildren: ()=> import("./components/product/product.module").then(m => m.ProductModule )}
+  { path: 'product/:id', loadChildren: ()=> import("./components/product/product.module").then(m => m.ProductModule )},
+  { path: 'not-found', loadChildren: ()=> import("./components/not-found/not-found.module").then(m => m.LoginModule )},
+  { path: '**', redirectTo: '/not-found' }
 ];
 
 @NgModule({
